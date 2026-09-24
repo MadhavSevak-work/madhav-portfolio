@@ -1260,6 +1260,7 @@ body.light-mode .sun-icon { display: none; }
 .cinematic-hero {
     position: relative;
     min-height: 100vh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1550,6 +1551,98 @@ body.light-mode .sun-icon { display: none; }
   40%, 82% { content: "MADHAV SEVAK"; color: var(--ink); }
   88%  { content: "M3DH*V S€VAK"; color: var(--ink-3); }
   94%  { content: "▒#DH1V S1VAK"; }
+}
+
+/* Teletype Typewriter Animation */
+.fx-typewriter {
+  width: 36ch;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: .05em solid var(--ink-2);
+  animation: fx-type 5s steps(36) infinite,
+             fx-caret .75s steps(1) infinite;
+  display: inline-block;
+  margin: 0 auto;
+}
+@keyframes fx-type {
+  0%, 15%   { width: 0; }
+  60%, 100% { width: 36ch; }
+}
+@keyframes fx-caret {
+  50% { border-color: transparent; }
+}
+
+/* Minimalist Split Screen Layout */
+.hero-split-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10vw;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.hero-block-left, .hero-block-right {
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-block-left {
+    align-items: flex-start;
+}
+
+.hero-block-right {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.hero-greeting {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    color: #a1a1aa;
+    margin-bottom: 0.5rem;
+}
+
+.hero-name {
+    font-size: clamp(3.75rem, 10vw, 8rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.hero-subtext {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    color: #a1a1aa;
+    margin-top: 1rem;
+    max-width: 20rem;
+}
+
+.hero-meta {
+    position: absolute;
+    font-size: 0.75rem;
+    color: #71717a;
+    pointer-events: auto;
+}
+
+.hero-meta.top-left {
+    top: 6rem;
+    left: 2.5rem;
+}
+
+.hero-meta.bottom-left {
+    bottom: 2.5rem;
+    left: 2.5rem;
 }
 
 /* Teletype Typewriter Animation */
