@@ -217,43 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSliders();
 });
 
-// Hero Scroll Animation
-const heroBg = document.querySelector('.hero-bg');
-const heroContent = document.querySelector('.hero-content');
-const scrollIndicator = document.querySelector('.scroll-indicator');
-
-window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        return;
-    }
-    
-    // Only animate if we are within the first screen height
-    if (scrollY <= window.innerHeight) {
-        const progress = scrollY / window.innerHeight;
-        
-        if (heroBg) {
-            // Scale up to 1.1 max
-            const scale = 1 + (progress * 0.1);
-            heroBg.style.transform = `scale(${scale})`;
-        }
-        
-        if (heroContent) {
-            // Translate up slightly and fade out
-            const translateY = progress * 50; // up to 50px
-            const opacity = Math.max(0, 1 - (progress * 2)); // fade out twice as fast
-            heroContent.style.transform = `translateY(-${translateY}px)`;
-            heroContent.style.opacity = opacity;
-        }
-        
-        if (scrollIndicator) {
-            // Fade out quickly
-            const opacity = Math.max(0, 1 - (progress * 4));
-            scrollIndicator.style.opacity = opacity;
-        }
-    }
-});
+// Hero Scroll animation removed as requested for the clean cinematic layout.
 
 // Blur Fade Animations for Showcase
 const showcaseObserver = new IntersectionObserver((entries) => {

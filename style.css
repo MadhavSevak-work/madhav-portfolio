@@ -1256,162 +1256,137 @@ body.light-mode .sun-icon { display: none; }
     color: var(--accent-primary);
 }
 
-/* Premium Hero Section */
-.premium-hero {
+/* Cinematic 2D Hero Section */
+.cinematic-hero {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #050505; /* Deep dark space */
-    overflow: hidden;
+    background-color: #050505;
     color: #fff;
-    text-align: center;
+    overflow: hidden;
+    padding-top: var(--nav-height);
 }
 
-.premium-hero-bg {
+.cinematic-bg {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(139, 148, 58, 0.15), transparent 60%);
+    /* Deep dark radial gradient highlighting the center */
+    background: radial-gradient(circle at 50% 50%, rgba(30, 40, 50, 0.3), transparent 70%);
     z-index: 1;
 }
 
-.premium-hero-container {
+.cinematic-container {
     position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: var(--nav-height);
+    width: 100%;
 }
 
-.premium-hero-content {
+.cinematic-tagline {
+    font-size: 0.875rem; /* text-sm */
+    letter-spacing: 0.1em; /* tracking-widest */
+    color: rgba(163, 230, 53, 0.8); /* lime-400/80 */
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.cinematic-headline {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #ffffff;
+}
+
+.cinematic-subtitle {
+    font-size: 1.125rem;
+    color: #9ca3af; /* text-gray-400 */
+    max-width: 32rem; /* max-w-lg */
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+.cinematic-buttons {
     display: flex;
-    flex-direction: column;
+    gap: 1.5rem;
     align-items: center;
-    max-width: 900px;
-}
-
-.text-mask {
-    overflow: hidden;
-    display: flex;
     justify-content: center;
 }
 
-.mt-2 { margin-top: 1rem; }
-
-/* Animations */
-@keyframes slideUp {
-    0% { transform: translateY(100%); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes fadeInScale {
-    0% { opacity: 0; transform: scale(0.95); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-.premium-greeting {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-primary-light);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transform: translateY(100%);
-    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.2s;
-}
-
-.premium-headline {
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: #ffffff;
-    transform: translateY(100%);
-    animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.4s;
-}
-
-.premium-subheadline {
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
-    color: #a1a1aa;
-    margin-top: 2rem;
-    max-width: 700px;
-    opacity: 0;
-    animation: fadeInScale 1s ease forwards;
-    animation-delay: 0.8s;
-}
-
-.premium-hero-buttons {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 3.5rem;
-    opacity: 0;
-    animation: fadeIn 1s ease forwards;
-    animation-delay: 1.1s;
-}
-
-.premium-btn {
+.cinematic-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem 2rem;
-    font-size: 1.125rem;
-    font-weight: 600;
-    border-radius: 99px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.875rem 2rem;
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    gap: 0.5rem;
 }
 
-.premium-btn.primary {
-    background-color: var(--color-primary-light);
+.cinematic-btn.primary {
+    background-color: #fff;
     color: #000;
-    box-shadow: 0 4px 14px 0 rgba(202, 209, 130, 0.39);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
-.premium-btn.primary:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px 0 rgba(202, 209, 130, 0.5);
+.cinematic-btn.primary:hover {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
 }
 
-.premium-btn.secondary {
+.cinematic-btn.secondary {
     background-color: transparent;
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.premium-btn.secondary:hover {
-    transform: scale(1.05);
-    border-color: #fff;
+.cinematic-btn.secondary:hover {
     background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
-.premium-hero-socials {
+/* Staggered Cinematic Animations (like Framer Motion) */
+@keyframes slideUpFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stagger-1 { animation: slideUpFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+.stagger-2 { animation: slideUpFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; }
+.stagger-3 { animation: slideUpFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
+.stagger-4 { animation: slideUpFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; opacity: 0; }
+.stagger-5 { animation: slideUpFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; opacity: 0; }
+
+.cinematic-scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    gap: 2rem;
-    margin-top: 4rem;
-    opacity: 0;
-    animation: fadeIn 1s ease forwards;
-    animation-delay: 1.4s;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6b7280;
+    font-size: 0.875rem;
 }
-
-.premium-hero-socials a {
-    color: #a1a1aa;
-    transition: all 0.3s ease;
-    display: inline-block;
-}
-
-.premium-hero-socials a:hover {
-    color: #fff;
-    transform: scale(1.2) translateY(-5px);
-}
-
-.premium-hero-socials a i {
-    width: 28px;
-    height: 28px;
+.cinematic-scroll-indicator i {
+    animation: bounce 2s infinite;
 }
 
 .premium-scroll-indicator {
