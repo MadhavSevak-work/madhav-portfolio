@@ -238,3 +238,97 @@ const showcaseObserver = new IntersectionObserver((entries) => {
 });
 
 document.querySelectorAll('.blur-fade-anim').forEach(el => showcaseObserver.observe(el));
+
+// Dynamic PDF Resume Generation
+const portfolioData = {
+  name: "Madhav Sevak",
+  contact: "madhavsevak.work@gmail.com | github.com/MadhavSevak-work",
+  education: [
+    { degree: "B.Tech Computer Science Engineering", institution: "MIT-WPU", duration: "2024 - 2028" }
+  ],
+  skills: "C, C++, MySQL, DSA, OOP, HTML, CSS, JavaScript, Git, GitHub, VS Code, Blender, 3D Modelling",
+  projects: [
+    { title: "FrameMind AI", desc: "A Rule-Based Expert System acting as an artificial Director of Photography. Built with JavaScript." },
+    { title: "Hospital Management System", desc: "A high-performance terminal system focusing on clean OOP principles. Built with C++17." },
+    { title: "Photobooth", desc: "An interactive web application featuring a highly stylized front-end using HTML, CSS, JavaScript." },
+    { title: "Schedule Manager", desc: "A responsive web application to seamlessly organize and track daily tasks." }
+  ]
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const downloadBtn = document.getElementById("download-resume-btn");
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      generateResumePDF();
+    });
+  }
+});
+
+function generateResumePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  
+  let y = 20;
+  const leftMargin = 20;
+  const pageWidth = doc.internal.pageSize.getWidth();
+  
+  // Header
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(22);
+  doc.text(portfolioData.name, pageWidth / 2, y, { align: "center" });
+  y += 8;
+  
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  doc.text(portfolioData.contact, pageWidth / 2, y, { align: "center" });
+  y += 15;
+  
+  // Helper function for section titles
+  const addSectionTitle = (title) => {
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text(title, leftMargin, y);
+    y += 2;
+    doc.setLineWidth(0.5);
+    doc.line(leftMargin, y, pageWidth - leftMargin, y);
+    y += 6;
+  };
+  
+  // Education
+  addSectionTitle("EDUCATION");
+  portfolioData.education.forEach(edu => {
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.text(edu.degree, leftMargin, y);
+    doc.setFont("helvetica", "normal");
+    doc.text(edu.duration, pageWidth - leftMargin, y, { align: "right" });
+    y += 5;
+    doc.text(edu.institution, leftMargin, y);
+    y += 10;
+  });
+  
+  // Skills
+  addSectionTitle("SKILLS");
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+  const splitSkills = doc.splitTextToSize(portfolioData.skills, pageWidth - 2 * leftMargin);
+  doc.text(splitSkills, leftMargin, y);
+  y += splitSkills.length * 5 + 5;
+  
+  // Projects
+  addSectionTitle("PROJECTS");
+  portfolioData.projects.forEach(proj => {
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.text(proj.title, leftMargin, y);
+    y += 5;
+    doc.setFont("helvetica", "normal");
+    const splitDesc = doc.splitTextToSize(proj.desc, pageWidth - 2 * leftMargin);
+    doc.text(splitDesc, leftMargin, y);
+    y += splitDesc.length * 5 + 5;
+  });
+  
+  // Save the PDF
+  doc.save("Madhav_Sevak_Resume.pdf");
+}
