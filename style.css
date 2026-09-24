@@ -1439,10 +1439,8 @@ body.light-mode .sun-icon { display: none; }
 
 /* Scroll Snapping Project Showcase */
 .project-showcase-container {
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
     background-color: #000;
     color: #fff;
     /* Optional: Hide scrollbar for cleaner look */
@@ -1453,14 +1451,13 @@ body.light-mode .sun-icon { display: none; }
 }
 
 .showcase-section {
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
-    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 5rem 2rem;
 }
 
 .showcase-content {
