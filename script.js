@@ -291,12 +291,11 @@ function buildResumePDF() {
     return lines.length * 5;
   };
 
-  // 1. Header Data (Scraped/Hardcoded mixed)
-  const headerName = document.querySelector('.cinematic-headline')?.innerText.trim() || 'MADHAV SEVAK';
+  // 1. Header Data
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(24);
-  doc.text(headerName, pageWidth / 2, y, { align: 'center' });
-  y += 8;
+  doc.text('MADHAV SEVAK', pageWidth / 2, y, { align: 'center' });
+  y += 10;
   
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(11);
