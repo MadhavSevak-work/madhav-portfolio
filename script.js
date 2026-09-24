@@ -241,7 +241,9 @@ document.querySelectorAll('.blur-fade-anim').forEach(el => showcaseObserver.obse
 
 
 
-// Dynamic PDF Resume Generation
+
+
+// Dynamic PDF Resume Generation (Live DOM Scraping)
 document.addEventListener('DOMContentLoaded', () => {
   const downloadBtn = document.getElementById('download-resume-btn');
   if (downloadBtn) {
@@ -260,30 +262,30 @@ function generateResumePDF() {
   const leftMargin = 20;
   const pageWidth = doc.internal.pageSize.getWidth();
   
-  // Helper for adding text with word wrap
   const addWrappedText = (text, x, yPos, maxWidth) => {
     const lines = doc.splitTextToSize(text, maxWidth);
     doc.text(lines, x, yPos);
     return lines.length * 5;
   };
-  
-  // 1. Header Section
+
+  // 1. Header Data (Scraped/Hardcoded mixed)
+  const headerName = document.querySelector('.cinematic-headline')?.innerText.trim() || 'MADHAV SEVAK';
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(24);
-  doc.text('MADHAV SEVAK', pageWidth / 2, y, { align: 'center' });
+  doc.text(headerName, pageWidth / 2, y, { align: 'center' });
   y += 8;
   
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(11);
-  doc.text('B.Tech Computer Science & Engineering Student', pageWidth / 2, y, { align: 'center' });
+  doc.text('Computer Science Engineering Student', pageWidth / 2, y, { align: 'center' });
   y += 6;
   
   doc.setFontSize(10);
-  doc.text('madhavsevak.work@gmail.com | +919024327604 | Pune, Maharastra', pageWidth / 2, y, { align: 'center' });
+  doc.text('madhavsevak.work@gmail.com | github.com/MadhavSevak-work', pageWidth / 2, y, { align: 'center' });
   y += 15;
   
-  // Section Title Helper
   const addSectionTitle = (title) => {
+    y += 4;
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(12);
     doc.text(title, leftMargin, y);
@@ -297,78 +299,91 @@ function generateResumePDF() {
   addSectionTitle('ABOUT ME');
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(10);
-  const aboutText = 'B.Tech Computer Science & Engineering student at MIT World Peace University with a foundation in C, C++, SQL. Currently developing skills in Computer Graphics and 3D modeling using Blender and OPENGL. Interested in building practical projects, improving programming skills and exploring different areas of technology.';
+  const aboutText = document.querySelector('#about p')?.innerText || '';
   y += addWrappedText(aboutText, leftMargin, y, pageWidth - 2 * leftMargin);
-  y += 8;
   
-  // 3. PRACTICAL WORK
-  addSectionTitle('PRACTICAL WORK');
-  
-  const addProject = (title, bullets) => {
+  // 3. PROJECTS
+  addSectionTitle('PROJECTS');
+  const projects = document.querySelectorAll('#projects .showcase-section');
+  projects.forEach(p => {
+    const title = p.querySelector('.showcase-title')?.innerText || '';
+    const desc = p.querySelector('.showcase-desc')?.innerText || '';
+    const link = p.querySelector('.showcase-btn')?.href || '';
+    const techSpan = Array.from(p.querySelectorAll('.showcase-tech span')).map(s => s.innerText).join(', ');
+    
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);
-    doc.text(title, leftMargin, y);
+    doc.text(title + (techSpan ? ' | ' + techSpan : ''), leftMargin, y);
     y += 5;
     
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
-    bullets.forEach(bullet => {
+    if(link) {
       doc.text('\u2022 ', leftMargin + 2, y);
-      const dy = addWrappedText(bullet, leftMargin + 6, y, pageWidth - 2 * leftMargin - 6);
-      y += dy;
-    });
+      y += addWrappedText('Live Demo: ' + link, leftMargin + 6, y, pageWidth - 2 * leftMargin - 6);
+    }
+    if(desc) {
+      doc.text('\u2022 ', leftMargin + 2, y);
+      y += addWrappedText(desc, leftMargin + 6, y, pageWidth - 2 * leftMargin - 6);
+    }
     y += 4;
-  };
+  });
   
-  addProject('Schedule Manager', [
-    'Live Demo: schedule-manager-two.vercel.app',
-    'Developed a web-based Schedule Manager application using JavaScript to help users organize and track their daily tasks and events.'
-  ]);
+  // 4. CREATIVE 3D WORK
+  addSectionTitle('CREATIVE 3D WORK');
+  const creativeProjects = document.querySelectorAll('#creative .comparison-project');
+  creativeProjects.forEach(p => {
+    const title = p.querySelector('.project-title')?.innerText || '';
+    const desc = p.querySelector('.project-desc')?.innerText || '';
+    const link = p.querySelector('.project-links a')?.href || '';
+    const techSpan = Array.from(p.querySelectorAll('.project-tech span')).map(s => s.innerText).join(', ');
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.text(title + (techSpan ? ' | ' + techSpan : ''), leftMargin, y);
+    y += 5;
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    if(link) {
+      doc.text('\u2022 ', leftMargin + 2, y);
+      y += addWrappedText('Live Demo: ' + link, leftMargin + 6, y, pageWidth - 2 * leftMargin - 6);
+    }
+    if(desc) {
+      doc.text('\u2022 ', leftMargin + 2, y);
+      y += addWrappedText(desc, leftMargin + 6, y, pageWidth - 2 * leftMargin - 6);
+    }
+    y += 4;
+    
+    // Simple pagination handling if we get too far down
+    if (y > 270) {
+      doc.addPage();
+      y = 20;
+    }
+  });
   
-  addProject('Photobooth', [
-    'Live Demo: https://photobooth-madhav.vercel.app',
-    'Created an interactive Photobooth web application featuring a highly stylized front-end built primarily with CSS.'
-  ]);
-  
-  addProject('Chess Pawn Visualization (Tag: BLENDER)', [
-    'Modeled a detailed chess pawn in Blender using precision-based 3D modeling techniques. Applied materials, lighting, camera positioning, and rendering to create a realistic chessboard scene.'
-  ]);
-  
-  addProject('Perfume Bottle Visualization (Tag: BLENDER)', [
-    'Designed and rendered a perfume bottle in Blender, focusing on product modeling, proportions, materials, studio lighting, and composition to create a professional product visualization.',
-    'Live Demo: madhav_sevak.artstation.com'
-  ]);
-  y += 4;
-  
-  // 4. EDUCATION
+  // 5. EDUCATION
+  if (y > 250) { doc.addPage(); y = 20; }
   addSectionTitle('EDUCATION');
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
-  doc.text('Bachelor of Technology', leftMargin, y);
+  doc.text('MIT World Peace University', leftMargin, y);
   doc.setFont('helvetica', 'normal');
   doc.text('2024-2028', pageWidth - leftMargin, y, { align: 'right' });
   y += 5;
   doc.setFontSize(10);
-  doc.text('\u2022 Computer Science & Engineering', leftMargin + 2, y);
-  y += 5;
-  doc.text('\u2022 MIT World Peace University, Pune', leftMargin + 2, y);
-  y += 12;
+  doc.text('\u2022 B.Tech Computer Science Engineering', leftMargin + 2, y);
+  y += 10;
   
-  // 5. KEY SKILLS
-  addSectionTitle('KEY SKILLS');
-  const skills = ['C Language', 'C++ Language', 'MYSQL', 'Blender', 'OPENGL'];
+  // 6. SKILLS
+  addSectionTitle('SKILLS');
+  const skillNodes = document.querySelectorAll('#skills .badge');
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(10);
-  skills.forEach(skill => {
-    doc.text('\u2022 ' + skill, leftMargin + 2, y);
+  skillNodes.forEach((s) => {
+    doc.text('\u2022 ' + s.innerText, leftMargin + 2, y);
     y += 5;
   });
-  y += 8;
-  
-  // 6. Footer
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.text('https://github.com/MadhavSevak-work  |  madhav_sevak.artstation.com', pageWidth / 2, 280, { align: 'center' });
   
   // Save the PDF
   doc.save('Madhav_Sevak_Resume.pdf');
