@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     /* Color Palette from User */
     --color-primary-light: #CAD182;
     --color-secondary-light: #FEEAC7;
@@ -1276,7 +1276,7 @@ body.light-mode .sun-icon { display: none; }
     inset: 0;
     /* Dark gradient overlay on top of the profile image for text readability */
     background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.95)), url('profile.jpg') center/cover no-repeat;
-    z-index: 1;
+    z-index: 0;
 }
 
 .cinematic-container {
