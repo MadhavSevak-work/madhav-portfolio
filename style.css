@@ -1273,8 +1273,8 @@ body.light-mode .sun-icon { display: none; }
 .cinematic-bg {
     position: absolute;
     inset: 0;
-    /* Deep dark radial gradient highlighting the center */
-    background: radial-gradient(circle at 50% 50%, rgba(30, 40, 50, 0.3), transparent 70%);
+    /* Dark gradient overlay on top of the profile image for text readability */
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.95)), url('profile.jpg') center/cover no-repeat;
     z-index: 1;
 }
 
