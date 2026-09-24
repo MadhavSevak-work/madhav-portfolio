@@ -96,6 +96,7 @@ let isEnd = false;
 const typingElement = document.getElementById('typing-text');
 
 function loop() {
+    if (!typingElement) return;
     isEnd = false;
     typingElement.innerHTML = currentPhrase.join('');
 
@@ -132,7 +133,9 @@ function loop() {
     setTimeout(loop, time);
 }
 
-loop();
+if (typingElement) {
+    loop();
+}
 
 // Before/After Slider Logic
 function initSliders() {
