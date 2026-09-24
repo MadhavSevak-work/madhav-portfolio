@@ -1552,3 +1552,23 @@ body.light-mode .sun-icon { display: none; }
   94%  { content: "▒#DH1V S1VAK"; }
 }
 
+/* Teletype Typewriter Animation */
+.fx-typewriter {
+  /* Using exact character width for 'Computer Science Engineering Student' (36 chars) */
+  width: 36ch;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: .05em solid var(--ink-2);
+  animation: fx-type 5s steps(36) infinite,
+             fx-caret .75s steps(1) infinite;
+  display: inline-block;
+  margin: 0 auto;
+}
+@keyframes fx-type {
+  0%, 15%   { width: 0; }
+  60%, 100% { width: 36ch; }
+}
+@keyframes fx-caret {
+  50% { border-color: transparent; }
+}
+
