@@ -1524,3 +1524,31 @@ body.light-mode .sun-icon { display: none; }
     transform: translateY(-50px);
 }
 
+/* Cipher Decoder Animation */
+:root { 
+  --ink: currentColor; 
+  --ink-2: #FF4FD8; 
+  --ink-3: #4FF8FF; 
+}
+
+.fx-decoder {
+  display: inline-block;
+  color: var(--ink-3);
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+}
+.fx-decoder::after {
+  content: "▓K#R1&Q SEVAK";
+  animation: fx-decoder 4s steps(1) infinite;
+}
+@keyframes fx-decoder {
+  0%   { content: "▓K#R1&Q S3V4K"; color: var(--ink-3); }
+  8%   { content: "M%#DH3V S▒VAK"; }
+  16%  { content: "MA☰H*V SEV*K"; }
+  24%  { content: "MADH0V SEV£K"; }
+  32%  { content: "MADH€V S€VAK"; }
+  40%, 82% { content: "MADHAV SEVAK"; color: var(--ink); }
+  88%  { content: "M3DH*V S€VAK"; color: var(--ink-3); }
+  94%  { content: "▒#DH1V S1VAK"; }
+}
+
