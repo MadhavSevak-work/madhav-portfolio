@@ -1046,6 +1046,7 @@ body.light-mode .sun-icon { display: none; }
     box-shadow: var(--shadow-lg);
     cursor: col-resize;
     touch-action: pan-y;
+    user-select: none; /* Prevent text selection highlight when dragging */
 }
 
 .comparison-slider img {
