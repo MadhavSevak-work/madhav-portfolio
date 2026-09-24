@@ -1254,3 +1254,184 @@ body.light-mode .sun-icon { display: none; }
 .premium-link:hover {
     color: var(--accent-primary);
 }
+
+/* Premium Hero Section */
+.premium-hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #050505; /* Deep dark space */
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+}
+
+.premium-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(139, 148, 58, 0.15), transparent 60%);
+    z-index: 1;
+}
+
+.premium-hero-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: var(--nav-height);
+}
+
+.premium-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+}
+
+.text-mask {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.mt-2 { margin-top: 1rem; }
+
+/* Animations */
+@keyframes slideUp {
+    0% { transform: translateY(100%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInScale {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.premium-greeting {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transform: translateY(100%);
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.2s;
+}
+
+.premium-headline {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    transform: translateY(100%);
+    animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.4s;
+}
+
+.premium-subheadline {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    color: #a1a1aa;
+    margin-top: 2rem;
+    max-width: 700px;
+    opacity: 0;
+    animation: fadeInScale 1s ease forwards;
+    animation-delay: 0.8s;
+}
+
+.premium-hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 1.1s;
+}
+
+.premium-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: 99px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-btn.primary {
+    background-color: var(--color-primary-light);
+    color: #000;
+    box-shadow: 0 4px 14px 0 rgba(202, 209, 130, 0.39);
+}
+.premium-btn.primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px 0 rgba(202, 209, 130, 0.5);
+}
+
+.premium-btn.secondary {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.premium-btn.secondary:hover {
+    transform: scale(1.05);
+    border-color: #fff;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.premium-hero-socials {
+    display: flex;
+    gap: 2rem;
+    margin-top: 4rem;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 1.4s;
+}
+
+.premium-hero-socials a {
+    color: #a1a1aa;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.premium-hero-socials a:hover {
+    color: #fff;
+    transform: scale(1.2) translateY(-5px);
+}
+
+.premium-hero-socials a i {
+    width: 28px;
+    height: 28px;
+}
+
+.premium-scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: #71717a;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 1.8s, bouncePremium 2s infinite 1.8s;
+}
+
+@keyframes bouncePremium {
+    0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+    40% { transform: translate(-50%, -10px); }
+    60% { transform: translate(-50%, -5px); }
+}
