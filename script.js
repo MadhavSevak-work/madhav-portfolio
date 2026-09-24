@@ -246,15 +246,38 @@ document.querySelectorAll('.blur-fade-anim').forEach(el => showcaseObserver.obse
 // Dynamic PDF Resume Generation (Live DOM Scraping)
 document.addEventListener('DOMContentLoaded', () => {
   const downloadBtn = document.getElementById('download-resume-btn');
+  const viewBtn = document.getElementById('view-resume-btn');
+
   if (downloadBtn) {
     downloadBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      generateResumePDF();
+      const originalText = downloadBtn.innerText;
+      downloadBtn.innerText = "Generating...";
+      setTimeout(() => {
+        const doc = buildResumePDF();
+        doc.save('Madhav_Sevak_Resume.pdf');
+        downloadBtn.innerText = originalText;
+      }, 100);
+    });
+  }
+
+  if (viewBtn) {
+    viewBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const originalText = viewBtn.innerText;
+      viewBtn.innerText = "Generating...";
+      setTimeout(() => {
+        const doc = buildResumePDF();
+        const blob = doc.output('blob');
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+        viewBtn.innerText = originalText;
+      }, 100);
     });
   }
 });
 
-function generateResumePDF() {
+function buildResumePDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
   
@@ -385,6 +408,6 @@ function generateResumePDF() {
     y += 5;
   });
   
-  // Save the PDF
-  doc.save('Madhav_Sevak_Resume.pdf');
+  // Return the PDF document instance
+  return doc;
 }

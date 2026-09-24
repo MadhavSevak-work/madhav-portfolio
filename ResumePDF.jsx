@@ -1,5 +1,5 @@
-import React from 'react';
-import { Document, Page, Text, View, StyleSheet, Link, Font } from '@react-pdf/renderer';
+import React, { useState } from 'react';
+import { Document, Page, Text, View, StyleSheet, Link, Font, pdf } from '@react-pdf/renderer';
 
 // Create styles
 const styles = StyleSheet.create({
@@ -257,3 +257,51 @@ export const ResumePDF = () => {
 };
 
 export default ResumePDF;
+
+export const ResumeButtons = () => {
+  const [isViewing, setIsViewing] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleView = async () => {
+    setIsViewing(true);
+    try {
+      const blob = await pdf(<ResumePDF />).toBlob();
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      setIsViewing(false);
+    }
+  };
+
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      const blob = await pdf(<ResumePDF />).toBlob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Madhav_Sevak_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
+  return (
+    <div className="cta-buttons">
+      <button onClick={handleDownload} className="btn btn-primary" disabled={isDownloading}>
+        {isDownloading ? 'Generating...' : 'Download Resume'}
+      </button>
+      <button onClick={handleView} className="btn btn-secondary" disabled={isViewing}>
+        {isViewing ? 'Generating...' : 'View Resume'}
+      </button>
+    </div>
+  );
+};
