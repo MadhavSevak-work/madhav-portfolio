@@ -1523,3 +1523,55 @@ body.light-mode .sun-icon { display: none; }
     filter: blur(12px);
     transform: translateY(-50px);
 }
+
+/* Feature Card */
+.feature-card {
+    background-color: #ffedd5;
+    color: #ea580c;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    max-width: 28rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    margin: 0 auto;
+}
+
+.feature-card:hover {
+    background-color: #ea580c;
+    color: #ffffff;
+}
+
+.feature-card .fc-heading {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.025em;
+    transition: color 0.3s ease-in-out;
+}
+
+.feature-card .fc-desc {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.375;
+    margin-bottom: 4rem;
+    max-width: 24rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.feature-card .fc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.feature-card .fc-footer span {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease-in-out;
+}
+
+.feature-card .fc-icon {
+    transition: color 0.3s ease-in-out;
+}
