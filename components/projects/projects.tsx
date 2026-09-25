@@ -105,7 +105,7 @@ const PROJECTS: Project[] = [
     description:
       "Modeled a detailed chess pawn with precision bevels and custom PBR specular reflection shaders. Drag the slider to compare unrendered model vs final render.",
     meta: "Blender, Subdivision Surface, PBR Materials",
-    imageRatio: 1,
+    imageRatio: 1320 / 701,
     image: "/chesspawn_after.png",
     beforeImage: "/chesspawn_before.png",
     imageAlt: "Chess Pawn 3D Render",
@@ -119,7 +119,7 @@ const PROJECTS: Project[] = [
     description:
       "Glass refraction, liquid caustics, and studio rim lighting. Drag slider to compare pre-render wireframe mesh with the finished raytraced composition.",
     meta: "Blender, Glass Caustics, Product Visualization",
-    imageRatio: 1,
+    imageRatio: 769 / 584,
     image: "/perfumebottle_after.png",
     beforeImage: "/perfumebottle_before.png",
     imageAlt: "Perfume Bottle 3D Render",
@@ -133,7 +133,7 @@ const PROJECTS: Project[] = [
     description:
       "Stylized 3D character design showcasing organic sculpting, vibrant materials, and cartoon cell rendering. Drag to compare clay model with final render.",
     meta: "Blender, Character Modeling, Stylized Materials",
-    imageRatio: 1,
+    imageRatio: 1343 / 719,
     image: "/CARTOONBIRD_AFTER.png",
     beforeImage: "/CARTOONBIRD_BEFORE.png",
     imageAlt: "Cartoon Bird 3D Model",
@@ -147,7 +147,7 @@ const PROJECTS: Project[] = [
     description:
       "Atmospheric low-poly 3D environment showcasing hard-surface vehicular modeling and ambient scene lighting. Drag to compare raw model with rendered lighting.",
     meta: "Blender, Low-Poly Hard Surface, Composition",
-    imageRatio: 16 / 10,
+    imageRatio: 1122 / 597,
     image: "/LOWPOLY_AFTER.png",
     beforeImage: "/LOWPOLY_BEFORE.png",
     imageAlt: "Low Poly Car Environment",
@@ -268,6 +268,7 @@ function ProjectCard({
                 src={project.image}
                 alt={project.imageAlt}
                 fill
+                unoptimized
                 sizes="(min-width: 1024px) 540px, (min-width: 768px) 45vw, 100vw"
                 className="object-cover"
                 priority={index < 2}

@@ -19,7 +19,7 @@ export function BeforeAfterSlider({
   afterImage,
   beforeAlt = "Before Render",
   afterAlt = "After Render",
-  aspectRatio = 1,
+  aspectRatio = 16 / 9,
   initialPosition = 50,
   className = "",
 }: BeforeAfterSliderProps): ReactNode {
@@ -70,19 +70,20 @@ export function BeforeAfterSlider({
       className={`group/slider relative w-full overflow-hidden select-none cursor-ew-resize touch-none ${className}`}
       style={{ aspectRatio }}
     >
-      {/* After Image (Background / Base) */}
+      {/* After Image (Background / Base - Full Lossless High-Res) */}
       <div className="absolute inset-0 h-full w-full">
         <Image
           src={afterImage}
           alt={afterAlt}
           fill
-          sizes="(min-width: 1024px) 540px, (min-width: 768px) 45vw, 100vw"
+          unoptimized
+          priority
+          sizes="100vw"
           className="object-cover pointer-events-none"
-          priority={false}
         />
       </div>
 
-      {/* Before Image (Clipped Overlay) */}
+      {/* Before Image (Clipped Overlay - Full Lossless High-Res) */}
       <div
         className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none"
         style={{
@@ -93,9 +94,10 @@ export function BeforeAfterSlider({
           src={beforeImage}
           alt={beforeAlt}
           fill
-          sizes="(min-width: 1024px) 540px, (min-width: 768px) 45vw, 100vw"
+          unoptimized
+          priority
+          sizes="100vw"
           className="object-cover pointer-events-none"
-          priority={false}
         />
       </div>
 
