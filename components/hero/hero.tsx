@@ -47,13 +47,20 @@ export function Hero(): ReactNode {
           </FadeIn>
 
           <ScaleUnblur className="flex justify-stretch md:justify-end">
-            <div className="relative aspect-square w-full md:max-w-105 overflow-hidden rounded-4xl border border-foreground/8 bg-background p-1.5 shadow-sm">
-              <div className="relative h-full w-full overflow-hidden rounded-[1.6rem]">
-                <PortraitMorph
-                  srcA={PORTRAIT_SRC}
-                  srcB={PORTRAIT_SRC}
-                  alt="Madhav Sevak portrait"
-                />
+            <div className="relative aspect-square w-full md:max-w-105">
+              {/* Soft ambient aura highlight */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-3 rounded-[2.8rem] bg-gradient-to-tr from-sky-500/25 via-indigo-500/20 to-purple-500/25 blur-2xl opacity-60 dark:opacity-40 transition-opacity"
+              />
+              <div className="relative h-full w-full overflow-hidden rounded-4xl border border-foreground/10 bg-background p-1.5 shadow-2xl transition-all duration-300 hover:border-foreground/20">
+                <div className="relative h-full w-full overflow-hidden rounded-[1.6rem] bg-neutral-100 dark:bg-neutral-900">
+                  <PortraitMorph
+                    srcA={PORTRAIT_SRC}
+                    srcB={PORTRAIT_SRC}
+                    alt="Madhav Sevak portrait"
+                  />
+                </div>
               </div>
             </div>
           </ScaleUnblur>

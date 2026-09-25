@@ -9,6 +9,7 @@ export type PortraitMorphProps = {
   srcB: string;
   alt: string;
   className?: string;
+  filter?: string;
 };
 
 const VERTEX_SHADER = `
@@ -39,9 +40,11 @@ vec2 coverUv(vec2 uv) {
     min((uResolution.x / uResolution.y) / (uImageSize.x / uImageSize.y), 1.0),
     min((uResolution.y / uResolution.x) / (uImageSize.y / uImageSize.x), 1.0)
   );
+  float zoom = 1.25;
+  vec2 focusedUv = (uv - 0.5) / zoom + vec2(0.5, 0.58);
   return vec2(
-    uv.x * ratio.x + (1.0 - ratio.x) * 0.5,
-    uv.y * ratio.y + (1.0 - ratio.y) * 0.5
+    focusedUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+    focusedUv.y * ratio.y + (1.0 - ratio.y) * 0.5
   );
 }
 
@@ -119,6 +122,7 @@ export function PortraitMorph({
   srcB,
   alt,
   className,
+  filter,
 }: PortraitMorphProps): ReactNode {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [ready, setReady] = useState(false);
@@ -307,14 +311,19 @@ export function PortraitMorph({
       role="img"
       aria-label={alt}
       className={className}
-      style={{ position: "relative", width: "100%", height: "100%", filter: "grayscale(100%)" }}
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100%",
+        filter: filter ?? "contrast(1.08) brightness(1.04) saturate(1.15)",
+      }}
     >
       {!ready ? (
         <img
           src={srcA}
           alt={alt}
           draggable={false}
-          className="absolute inset-0 h-full w-full select-none object-cover"
+          className="absolute inset-0 h-full w-full select-none object-cover object-[center_35%]"
         />
       ) : null}
     </div>
