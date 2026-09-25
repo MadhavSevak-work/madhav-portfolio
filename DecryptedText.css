@@ -1,0 +1,39 @@
+/* DecryptedText Styles */
+.decrypted-text-wrapper {
+  display: inline-block;
+  white-space: nowrap !important;
+  user-select: none;
+  cursor: pointer;
+}
+
+.decrypted-revealed {
+  color: #ffffff;
+  display: inline-block;
+  transition: color 0.15s ease;
+}
+
+.decrypted-scrambled {
+  color: var(--accent-primary, #a855f7);
+  font-family: 'SFMono-Regular', 'Roboto Mono', 'Cascadia Code', monospace;
+  display: inline-block;
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.7);
+  opacity: 0.95;
+}
+
+/* Hero Section Single-Line Override */
+#hero-decrypted-name {
+  white-space: nowrap !important;
+  font-size: clamp(2.2rem, 5.8vw, 4.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  line-height: 1.1;
+  display: inline-block;
+}
+
+@media (max-width: 640px) {
+  #hero-decrypted-name {
+    font-size: clamp(1.85rem, 8.5vw, 2.75rem);
+    letter-spacing: -0.02em;
+  }
+}
